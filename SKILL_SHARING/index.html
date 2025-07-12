@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Caffein - Find Study Mate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body { font-family: sans-serif; background: #f8e3c2; margin: 0; padding: 0; }
+    .container { 
+      max-width: 420px; 
+      margin: 60px auto; 
+      background: #fff; 
+      border-radius: 12px; 
+      padding: 30px; 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+    }
+    h1 { color: #ad4b09; margin-top: 0; }
+    label { font-weight: bold; display: block; margin: 12px 0 4px; }
+    input, select, textarea, button { 
+      width: 100%; 
+      border: 1px solid #ccc; 
+      border-radius: 4px; 
+      padding: 8px; 
+      box-sizing: border-box;
+      font-size: 1em;
+    }
+    textarea { resize: vertical; min-height: 80px; }
+    button { 
+      background: #ee9637; 
+      color: #fff; 
+      border: none; 
+      font-size: 1.1em; 
+      cursor: pointer; 
+      margin-top: 16px;
+    }
+    button:disabled { background: #ccc; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Caffein</h1>
+    <form id="dataForm">
+      <label for="fullName">Full name</label>
+      <input type="text" id="fullName" placeholder="Your full name" required />
+
+      <label for="topic">Topic</label>
+      <select id="topic" required>
+        <option value="" disabled selected>Select a topic</option>
+        <option>Math</option>
+        <option>Physics</option>
+        <option>Chemistry</option>
+        <option>Literature</option>
+        <option>History</option>
+      </select>
+
+      <label for="level">Level</label>
+      <select id="level" required>
+        <option value="" disabled selected>Select your level</option>
+        <option>Professional</option>
+        <option>Intermediate</option>
+        <option>Beginner</option>
+      </select>
+
+      <label for="experience">Experience</label>
+      <textarea id="experience" placeholder="Tell us a bit about yourself…"></textarea>
+
+      <button type="submit">Find study mate</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('dataForm');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const fullName   = form.fullName.value.trim();
+      const topic      = form.topic.value;
+      const level      = form.level.value;
+      const experience = form.experience.value.trim();
+
+      if (!fullName) {
+        alert('Vui lòng điền tên đầy đủ.');
+        return;
+      }
+      if (!topic || !level) {
+        alert('Vui lòng chọn chủ đề và trình độ.');
+        return;
+      }
+
+      const userData = { fullName, topic, level, experience };
+      console.log('📝 Saved userData:', userData);
+      localStorage.setItem('userData', JSON.stringify(userData));
+
+      // Chuyển sang màn hình call
+      window.location.href = 'call.html';
+    });
+  </script>
+</body>
+</html>
